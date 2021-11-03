@@ -1,6 +1,9 @@
 package de.exxcellent.challenge;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class DataService {
 
@@ -12,7 +15,7 @@ public class DataService {
      * @throws NumberFormatException when encountering at least one item that cannot be parsed to double
      */
     public List<Double> listOfStringsToDouble(List<String> input) throws NumberFormatException {
-        return null;
+        return input.stream().map(Double::parseDouble).collect(Collectors.toList());
     }
 
     /**
@@ -23,7 +26,12 @@ public class DataService {
      * @return list containing the absolute difference of corresponding items in the input lists
      */
     public List<Double> absDiffList(List<Double> list1, List<Double> list2) {
-        return null;
+        if (list1.size() != list2.size()) {
+            throw new IllegalArgumentException("passed lists must be of the same size!");
+        }
+        return IntStream.range(0, list1.size())
+                .mapToDouble(i -> Math.abs(list1.get(i) - list2.get(i)))
+                .boxed().collect(Collectors.toList());
     }
 
     /**
@@ -33,7 +41,11 @@ public class DataService {
      * @return index of the smallest item in the provided list, -1 when input is empty
      */
     public int argMin(List<Double> list) {
-        return 0;
+        if (list.isEmpty()) {
+            return -1;
+        }
+        Double minDiff = Collections.min(list);
+        return list.indexOf(minDiff);
     }
 
 }
