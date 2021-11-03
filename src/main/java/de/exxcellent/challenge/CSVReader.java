@@ -9,6 +9,16 @@ import java.util.InputMismatchException;
 import java.util.List;
 
 public class CSVReader {
+
+    /**
+     * reads content of a csv file
+     *
+     * @param filePath path to the csv file to be read
+     * @return a list of lists of strings where each sublist represents a row in a csv file and the individual strings
+     *         are the respective cells of that row
+     * @throws IOException when I/O error on file handling occurrs
+     * @throws InputMismatchException when content of read csv file does not meet expectations
+     */
     public List<List<String>> read(String filePath) throws IOException, InputMismatchException {
 
         List<List<String>> lines = new ArrayList<>();
