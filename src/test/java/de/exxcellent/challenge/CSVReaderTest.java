@@ -56,4 +56,40 @@ class CSVReaderTest {
                 "should throw an InputMismatchException when a file is read with non-csv content");
     }
 
+    @Test
+    void extractColumn() {
+        List<List<String>> csvData = List.of(
+                List.of("header", "row", "requestedCol"),
+                List.of("data0", "data1", "get"),
+                List.of("data2", "data4", "this"),
+                List.of("data5", "data6", "column")
+        );
+        List<String> requestedCol = csvReader.columnFromCsvData(csvData, "requestedCol");
+        assertEquals(List.of("get", "this", "column"), requestedCol,
+                "sequence extractor should get data of requested column");
+    }
+
+    @Test
+    void extractColumnNotPresent() {
+        List<List<String>> csvData = List.of(
+                List.of("header", "row", "requestedCol"),
+                List.of("data0", "data1", "get"),
+                List.of("data2", "data4", "this"),
+                List.of("data5", "data6", "column")
+        );
+        List<String> requestedCol = csvReader.columnFromCsvData(csvData, "notAColumn");
+        assertEquals(Collections.EMPTY_LIST, requestedCol,
+                "when column is not present, resulting sequence should be empty");
+    }
+
+
+    @Test
+    void extractFromEmpty() {
+        assertEquals(
+                Collections.EMPTY_LIST,
+                csvReader.columnFromCsvData(Collections.emptyList(), "redundant"),
+                "when data is empty, resulting sequence should be empty"
+        );
+    }
+
 }

@@ -41,4 +41,18 @@ public class CSVReader {
         fileReader.close();
         return lines;
     }
+
+    /**
+     * extracts a column with given name from csv data in form of a nested list by getting the column's index based on
+     * the first list item
+     *
+     * @param csvData nested list representing csv data
+     * @param colName name of the column to extract
+     * @return content of cells in the requested column as list of strings
+     */
+    public List<String> columnFromCsvData(List<List<String>> csvData, String colName) {
+        return null;
+    }
+
+
 }
