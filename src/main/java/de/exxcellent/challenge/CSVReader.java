@@ -3,10 +3,8 @@ package de.exxcellent.challenge;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CSVReader {
 
@@ -51,7 +49,14 @@ public class CSVReader {
      * @return content of cells in the requested column as list of strings
      */
     public List<String> columnFromCsvData(List<List<String>> csvData, String colName) {
-        return null;
+        if (csvData.isEmpty()) {
+            return Collections.emptyList();
+        }
+        int colIdx = csvData.get(0).indexOf(colName);
+        if (colIdx == -1) {
+            return Collections.emptyList();
+        }
+        return csvData.stream().skip(1).map(row -> row.get(colIdx)).collect(Collectors.toList());
     }
 
 
