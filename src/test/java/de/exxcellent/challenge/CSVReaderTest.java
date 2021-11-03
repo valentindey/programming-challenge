@@ -32,6 +32,10 @@ class CSVReaderTest {
         );
         assertNotNull(csvContent, "read content should not be null");
         assertEquals(5, csvContent.size(), "should read all lines of the small test csv file");
+        List<String> expectedFirstLine = List.of(
+                "1", "88", "59", "74", "53.8", "0", "280", "9.6" , "270", "17", "1.6", "93", "23", "1004.5"
+        );
+        assertEquals(expectedFirstLine, csvContent.get(1));
     }
 
     @Test

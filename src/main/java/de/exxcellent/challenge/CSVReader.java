@@ -16,14 +16,14 @@ public class CSVReader {
         FileReader fileReader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        int numFields = -1;
+        int numCells = -1;
 
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             String[] splitLine = line.split(",");
-            if (numFields == -1) {
-                numFields = splitLine.length;
-            } else if (splitLine.length != numFields) {
+            if (numCells == -1) {
+                numCells = splitLine.length;
+            } else if (splitLine.length != numCells) {
                 throw new InputMismatchException("encountered line with different number of fields than before");
             }
             lines.add(Arrays.asList(splitLine));
