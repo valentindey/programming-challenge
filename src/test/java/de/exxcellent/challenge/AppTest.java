@@ -35,7 +35,7 @@ class AppTest {
     @Test
     void testGetMinDiffNameWeather() {
         String dayWithSmallestTempSpread = App.getMinDiffName(
-                resourcePath + "weather.txt", "Day", "MxT", "MnT"
+                resourcePath + "weather.csv", "Day", "MxT", "MnT"
         );
         assertEquals("14", dayWithSmallestTempSpread,
                 "day with smallest temperature spread should be found");
