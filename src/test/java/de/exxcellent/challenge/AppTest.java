@@ -1,6 +1,5 @@
 package de.exxcellent.challenge;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,21 +10,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class AppTest {
 
-    private String successLabel = "not successful";
-
-    @BeforeEach
-    void setUp() {
-        successLabel = "successful";
-    }
-
-    @Test
-    void aPointlessTest() {
-        assertEquals("successful", successLabel, "My expectations were not met");
-    }
+    final private String resourcePath = "src/main/resources/de/exxcellent/challenge/";
 
     @Test
     void runFootball() {
-        App.main("--football", "football.csv");
+        App.main("--football", resourcePath + "football.csv");
+    }
+
+
+    @Test
+    void testGetMinDiffNameFootball() {
+        String teamWithSmallestGoalSpread = App.getMinDiffName(
+                resourcePath + "football.csv", "Team", "Goals", "Goals Allowed"
+        );
+        assertEquals("Aston_Villa", teamWithSmallestGoalSpread,
+                "team with smallest goal spread should be found");
+    }
+
+    @Test
+    void runWeather() {
+        App.main("--weather", resourcePath + "weather.csv");
+    }
+
+    @Test
+    void testGetMinDiffNameWeather() {
+        String dayWithSmallestTempSpread = App.getMinDiffName(
+                resourcePath + "weather.txt", "Day", "MxT", "MnT"
+        );
+        assertEquals("14", dayWithSmallestTempSpread,
+                "day with smallest temperature spread should be found");
     }
 
 }
