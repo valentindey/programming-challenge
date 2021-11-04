@@ -13,8 +13,8 @@ public class CSVReader {
      *
      * @param filePath path to the csv file to be read
      * @return a list of lists of strings where each sublist represents a row in a csv file and the individual strings
-     *         are the respective cells of that row
-     * @throws IOException when I/O error on file handling occurrs
+     * are the respective cells of that row
+     * @throws IOException            when I/O error on file handling occurs
      * @throws InputMismatchException when content of read csv file does not meet expectations
      */
     public List<List<String>> read(String filePath) throws IOException, InputMismatchException {

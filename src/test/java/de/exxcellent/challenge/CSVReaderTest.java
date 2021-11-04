@@ -19,45 +19,45 @@ class CSVReaderTest {
     final private CSVReader csvReader = new CSVReader();
 
     @Test
-    void readEmptyFile() {
+    void testReadEmptyFile() {
         List<List<String>> csvContent = assertDoesNotThrow(() -> csvReader.read(resourcePath + "empty.csv"));
         assertEquals(Collections.EMPTY_LIST, csvContent,
                 "should return an empty list when reading an empty file");
     }
 
     @Test
-    void readCsvFile() {
+    void testReadCsvFile() {
         List<List<String>> csvContent = assertDoesNotThrow(
                 () -> csvReader.read(resourcePath + "test_weather.csv")
         );
         assertNotNull(csvContent, "read content should not be null");
         assertEquals(5, csvContent.size(), "should read all lines of the small test csv file");
         List<String> expectedFirstLine = List.of(
-                "1", "88", "59", "74", "53.8", "0", "280", "9.6" , "270", "17", "1.6", "93", "23", "1004.5"
+                "1", "88", "59", "74", "53.8", "0", "280", "9.6", "270", "17", "1.6", "93", "23", "1004.5"
         );
         assertEquals(expectedFirstLine, csvContent.get(1));
     }
 
     @Test
-    void throwFileNotFound() {
+    void testThrowFileNotFound() {
         assertThrows(FileNotFoundException.class, () -> csvReader.read(resourcePath + "does_not_exist.csv"),
                 "should throw FileNotFoundException when the requested file does not exist");
     }
 
     @Test
-    void throwHeaderMismatch() {
+    void testThrowOnHeaderMismatch() {
         assertThrows(InputMismatchException.class, () -> csvReader.read(resourcePath + "header_mismatch.csv"),
                 "should throw an InputMismatchException when header has less columns than content");
     }
 
     @Test
-    void throwInvalidContent() {
+    void testThrowOnInvalidContent() {
         assertThrows(InputMismatchException.class, () -> csvReader.read(resourcePath + "bad_content.csv"),
                 "should throw an InputMismatchException when a file is read with non-csv content");
     }
 
     @Test
-    void extractColumn() {
+    void testExtractColumn() {
         List<List<String>> csvData = List.of(
                 List.of("header", "row", "requestedCol"),
                 List.of("data0", "data1", "get"),
@@ -70,7 +70,7 @@ class CSVReaderTest {
     }
 
     @Test
-    void extractColumnNotPresent() {
+    void testExtractColumnNotPresent() {
         List<List<String>> csvData = List.of(
                 List.of("header", "row", "requestedCol"),
                 List.of("data0", "data1", "get"),
@@ -84,7 +84,7 @@ class CSVReaderTest {
 
 
     @Test
-    void extractFromEmpty() {
+    void tesExtractFromEmpty() {
         assertEquals(
                 Collections.EMPTY_LIST,
                 csvReader.columnFromCsvData(Collections.emptyList(), "redundant"),
