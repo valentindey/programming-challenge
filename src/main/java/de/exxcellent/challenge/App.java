@@ -16,13 +16,20 @@ public final class App {
      */
     public static void main(String... args) {
 
-        // Your preparation code …
-
-        String dayWithSmallestTempSpread = "Someday";     // Your day analysis function call …
-        System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
-
-        String teamWithSmallestGoalSpread = "A good team"; // Your goal analysis function call …
-        System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+        // CLI arguments may easily be adjusted to allow different columns etc.
+        if (args[0].equals("--football")) {
+            String teamWithSmallestGoalSpread = getMinDiffName(
+                    args[1], "Team", "Goals", "Goals Allowed"
+            );
+            System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
+        } else if (args[0].equals("--weather")) {
+            String dayWithSmallestTempSpread = getMinDiffName(
+                    args[1], "Day", "MxT", "MnT"
+            );
+            System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
+        } else {
+            System.out.println("Input not understood, please provide two arguments: --football/--weather <CSV_FILE_NAME>");
+        }
     }
 
     /**
